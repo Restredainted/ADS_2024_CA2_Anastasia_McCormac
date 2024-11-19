@@ -26,5 +26,13 @@
     <ClInclude Include="BSTNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TreeMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CA2 - Assessment Spec.docx">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

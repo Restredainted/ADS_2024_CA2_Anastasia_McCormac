@@ -132,6 +132,10 @@
   <ItemGroup>
     <ClInclude Include="BinaryTree.h" />
     <ClInclude Include="BSTNode.h" />
+    <ClInclude Include="TreeMap.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CA2 - Assessment Spec.docx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
