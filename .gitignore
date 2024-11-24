@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/ADS_2024_CA2_Anastasia_McCormac/ADS_2024_CA2_Anastasia_McCormac.vcxproj
+/ADS_2024_CA2_Anastasia_McCormac/ADS_2024_CA2_Anastasia_McCormac.vcxproj.filters
