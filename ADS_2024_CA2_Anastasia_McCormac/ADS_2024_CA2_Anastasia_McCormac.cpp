@@ -1,13 +1,13 @@
 // ADS_2024_CA2_Anastasia_McCormac.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <sstream>
-#include "TreeMap.h"
-#include "Entity.h"
 #include "BinaryTree.h"
+#include "Entity.h"
+#include "TreeMap.h"
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
 
 void Q1();
 void Q2();
@@ -38,15 +38,15 @@ int main()
 /// </summary>
 void Q1() {
 
-    BinaryTree<Entity<int, std::string>> testTree {};
+    BinaryTree<Entity<int, std::vector<std::string>>> testTree {};
 
-    Entity<int, std::string> newEnt {2, "World"};
+    Entity<int, std::vector<std::string>> newEnt { 2, std::vector<std::string>{"World"}};
     testTree.add(newEnt);
 
-    newEnt = Entity<int, std::string>(1, "Hello");
+    newEnt = Entity<int, std::vector<std::string>> { 1, std::vector<std::string>{"Hello"}};
     testTree.add(newEnt);
 
-    newEnt = Entity<int, std::string>(3, "!");
+    newEnt = Entity<int, std::vector<std::string>>{3, std::vector<std::string>{"!"}};
     testTree.add(newEnt);
 
     testTree.printInOrder();
@@ -57,13 +57,13 @@ void Q2() {
     // Ref: Rath, R. (2020). The Infinite and the Divine. 1st ed, Black Library.
     std::fstream fin { "InfiniteAndDivineExtract.txt"};
 
-    BinaryTree<Entity<char, std::string>> uniqueWordTree {};
+    BinaryTree<Entity<char, std::vector<std::string>>> uniqueWordTree {};
 
     if (fin) {
         
         std::cout << "File open";
 
-        Entity<char, std::string> wordEnt {};
+        Entity<char, std::vector<std::string>> wordEnt {};
         std::string line;
 
         while (std::getline(fin, line, ' ')) {
@@ -82,14 +82,14 @@ void Q2() {
                 word = line.at(line.find_first_of(' '));
                 std::cout << word;*/
 
-                wordEnt = Entity<char, std::string>(line.at(0), line);
+            wordEnt = Entity<char, std::vector<std::string>> { line.at(0), std::vector<std::string>{line} };
                 //cout << wordEnt << endl;;
 
                 uniqueWordTree.add(wordEnt);
             //}
         }
     }
-    cout << "\n\n\n" << endl;
+    std::cout << "\n\n\n" << std::endl;
     
     uniqueWordTree.printInOrder();
 };

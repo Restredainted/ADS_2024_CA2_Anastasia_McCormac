@@ -171,7 +171,7 @@ T& BinaryTree<T>::get(T& item)
 		else
 			current = current->getRight();
 	}
-	throw logic_error("Item not found");
+	throw std::logic_error("Item not found");
 }
 template <class T>
 void BinaryTree<T>::addItemToArray(BSTNode<T>* node, int &pos, T *arr)
@@ -215,25 +215,29 @@ template<class T>
 void BinaryTree<T>::printInOrder()
 {
 	this->printInOrder(root);
-	cout << endl;
+	std::cout << std::endl;
 }
 template<class T>
 void BinaryTree<T>::printInOrder(BSTNode<T> *node)
 {
-	if (node->getLeft() != nullptr)
-		printInOrder(node->getLeft());
+	// Check if there's anything in the tree first. 
+	if (root != nullptr) {
 
-	std::cout << node->getItem() << std::endl;
+		if (node->getLeft() != nullptr)
+			printInOrder(node->getLeft());
 
-	if (node->getRight() != nullptr)
-	printInOrder(node->getRight());
+		std::cout << node->getItem() << std::endl;
+
+		if (node->getRight() != nullptr)
+			printInOrder(node->getRight());
+	}
 }
 
 template<class T>
 void BinaryTree<T>::printPreOrder()
 {
 	this->printPreOrder(root);
-	cout << endl;
+	std::cout << std::endl;
 }
 template<class T>
 void BinaryTree<T>::printPreOrder(BSTNode<T> *node)
@@ -246,7 +250,7 @@ template<class T>
 void BinaryTree<T>::printPostOrder()
 {
 	this->printPostOrder(root);
-	cout << endl;
+	std::cout << std::endl;
 }
 template<class T>
 void BinaryTree<T>::printPostOrder(BSTNode<T> *node)
