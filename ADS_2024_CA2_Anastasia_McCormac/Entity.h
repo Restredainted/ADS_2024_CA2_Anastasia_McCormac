@@ -1,3 +1,6 @@
+// Author: Anastasia McCormac - GD3a
+// Created on: 
+
 #pragma once
 #include <iostream>
 
@@ -32,10 +35,6 @@ public:
 	//// << operator, required to print out elements. 
 	//friend ostream &operator<< (ostream &out, const Entity<K, V> &ent);
 
-	template<class K, class V>
-	bool addItem(K key, V Value) {
-
-	};
 
 	template<class K, class V>
 	bool operator < (Entity<K, V> &right) {
@@ -48,17 +47,17 @@ public:
 	};
 
 	template<class K, class V>
-	bool operator==(Entity<K, V> &other) {
+	bool operator== (Entity<K, V> &other) {
 
 		return key == other.key;
 	};
 };
 
 template<class K, class V>
-std::ostream &operator<<(std::ostream &out, const Entity<K, V> &ent) {
+std::ostream &operator<<(std::ostream &out,  Entity<K, V> &ent) {
 
 	out << "Key: " << ent.key 
-		<< " Value: " << ent.value;
+		<< "\nValue: \n" << ent.value;
 
 	return out;
 };

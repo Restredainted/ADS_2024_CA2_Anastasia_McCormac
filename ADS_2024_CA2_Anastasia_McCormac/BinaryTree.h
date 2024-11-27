@@ -1,4 +1,5 @@
-﻿#pragma once
+﻿// Provided by Lecturer Dr. Derek Flood.
+#pragma once
 #include "BSTNode.h"
 
 #include <vector>
@@ -16,7 +17,8 @@ public:
 	void clear();
 	int count();
 	T& get(T& item);
-
+	template <class T>
+	friend std::ostream &operator<< (std::ostream &out, BinaryTree<T> &tree);
 	void printInOrder();
 	void printInOrder(BSTNode<T> *node);
 	void printPreOrder();
@@ -26,6 +28,12 @@ public:
 	T* toArray();
 	~BinaryTree();
 };
+template <class T>
+std::ostream &operator<< (std::ostream &out, BinaryTree<T> &tree) {
+
+	tree.printInOrder();
+	return out;
+}
 
 template <class T>
 BinaryTree<T>::BinaryTree() {
@@ -68,6 +76,7 @@ void BinaryTree<T>::add(T &item) {
 	else {
 
 		root->add(item);
+		//std::cout <<"***" << item << std::endl;
 	}
 };
 
