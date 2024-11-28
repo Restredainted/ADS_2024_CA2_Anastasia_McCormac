@@ -76,7 +76,6 @@ void BinaryTree<T>::add(T &item) {
 	else {
 
 		root->add(item);
-		//std::cout <<"***" << item << std::endl;
 	}
 };
 

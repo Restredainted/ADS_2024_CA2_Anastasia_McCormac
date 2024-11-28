@@ -85,14 +85,6 @@ void Q2() {
 
             while (std::getline(ss, word, delim)) {
 
-                //word = line.substr(line.at(' '));
-                std::cout << word << std::endl;
-
-                //line = line.substr(line.at(' '));
-
-                //word = line.at(line.find_first_of(' '));
-                //std::cout << word;
-
                 if (uniqueWordTree.ContainsKey(word.at(0))) {
 
                     uniqueWordTree.Get(word.at(0)).add(word);
@@ -118,9 +110,8 @@ void Q2() {
     std::string input;
     int selection = 0;
     
-
-
     do {
+
         std::cout << "\n What would you like to view?" << std::endl;
         std::cout << "1. View unique letters." << std::endl;
         std::cout << "2. View words by letter." << std::endl;
@@ -131,15 +122,15 @@ void Q2() {
         selection = tryStoi(input);
 
         switch (selection) {
+
             case 1:
                 //uniqueWordTree.KeySet().printInOrder();
                 break;
+
             case 2:
                 uniqueWordTree.PrintInOrder();
                 break;
         }
-
-
     }
     while (selection != 0);
 
