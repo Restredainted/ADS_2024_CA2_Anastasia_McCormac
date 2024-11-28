@@ -27,8 +27,7 @@ struct Game {
 	Rating rating;
 	int posRatio;
 	int userReviews;
-	float priceFinal;
-	float priceOriginal;
+	float price;
 
 	// Operator Overload Functions. 
 	bool operator < (Game &other) {
@@ -53,7 +52,7 @@ std::string RatingToStr(Game &game);
 // Output stream opereator overload for Game struct. 
 std::ostream &operator<<(std::ostream &out, Game &game) {
 
-	 printf("| %-8d | %-25s | %-12s | %-8s | %-8s | %-8s | %-10s | %-24s | %-12d | %-15d | %10.2f | %10.2f |",
+	 printf("| %-8d | %-25s | %-12s | %-8s | %-8s | %-8s | %-10s | %-24s | %-6d | %-7d | %6.2f |",
 		game.appId,
 		(game.title.length() <= 25) ? game.title.c_str() : game.title.substr(0, 25).c_str(),
 		game.relDate.c_str(),
@@ -64,14 +63,55 @@ std::ostream &operator<<(std::ostream &out, Game &game) {
 		RatingToStr(game).c_str(),
 		game.posRatio,
 		game.userReviews,
-		game.priceFinal,
-		game.priceOriginal 
+		game.price
 	 );
 	
 	 
 	return out;
 };
 
+/// <summary>
+/// Discerns the string value as it's appropriate enum state. 
+/// </summary>
+/// <param name="input">String to evaluate.</param>
+/// <returns>Rating Enum value.</returns>
+Rating GetRating(std::string &input) {
+
+	if (input == "Overwhelmingly Positive")
+		return OverwhelminglyPositive;
+
+	if (input == "Very Positive")
+		return VeryPositive;
+
+	if (input == "Positive")
+		return Positive;
+
+	if (input == "Mostly Positive")
+		return MostlyPositive;
+
+	if (input == "Mixed")
+		return Mixed;
+
+	if (input == "Mostly Negative")
+		return MostlyNegative;
+
+	if (input == "Negative")
+		return Negative;
+
+	if (input == "Very Negative")
+		return VeryNegative;
+
+	if (input == "Overwhelmingly Negative")
+		return OverwhelminglyNegative;
+
+	return Mixed;
+}
+
+/// <summary>
+/// Evaluate the rating of a game to a string value.
+/// </summary>
+/// <param name="game">Game object of which to evaluate its rating. </param>
+/// <returns>Game's rating as a string.</returns>
 std::string RatingToStr(Game &game) {
 
 	std::string value {};
