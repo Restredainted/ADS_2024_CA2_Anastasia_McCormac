@@ -32,9 +32,18 @@
     <ClInclude Include="Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="CA2 - Assessment Spec.docx">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="gamesFull.csv">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="games.csv">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

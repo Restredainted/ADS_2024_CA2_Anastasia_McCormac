@@ -10,33 +10,45 @@
 #include "TreeMap.h"
 #include "Entity.h"
 #include "BinaryTree.h"
+#include "Game.h"
 
 void Q1();
 void Q2();
 void Q3();
 void Q4();
 int tryStoi(const std::string &input);
-
-
+Rating getRating(std::string &input);
+enum question { A = 1, B = 2, C = 3, D = 4 };
 
 int main()
 {
     std::cout << " ADS_2024_CA2_Anastasia_McCormac\n";
 
-    Q1();
-    Q2(); 
+    // Change this value to change which question is accessed. 
+    question showQ { C };
+
+    switch (showQ) {
+    
+    case A:
+        Q1();
+        break;
+
+    case B:
+        Q2();
+        break;
+
+    case C:
+        Q3();
+        break;
+
+    case D:
+        Q4();
+        break;
+
+    default:
+        break;
+    }
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
 
 #pragma region Stage 1
 
@@ -66,7 +78,7 @@ void Q1() {
 void Q2() {
     
     // Ref: Rath, R. (2020). The Infinite and the Divine. 1st ed, Black Library.
-    std::fstream fin { "InfiniteAndDivineExtract.txt"};
+    std::fstream fin { "InfiniteAndDivineExtract.txt" };
 
     TreeMap<char, BinaryTree<std::string>> uniqueWordTree {};
 
@@ -106,6 +118,9 @@ void Q2() {
 
         std::cout << "File read failed." << std::endl;
     }
+    
+
+    fin.close();
 
     std::string input;
     int selection = 0;
@@ -143,7 +158,101 @@ void Q2() {
 
 void Q3() {
 
+
+    // Ref: Kozyriev, A. (2024). Game Recommendations on Steam (Online) Available at: 
+    // https://www.kaggle.com/datasets/antonkozyriev/game-recommendations-on-steam [Last Accessed 28/11/2024]
+    std::fstream fin { "games.csv" };
+
+    TreeMap<char, BinaryTree<Game>> steamGames {};
+
+    steamGames.PrintInOrder();
+    if (fin) {
+
+        std::cout << "File Opened Successfully\n";
+
+        std::string line;
+
+        std::getline(fin, line); // Clear headers row.
+
+        std::cout << line << std::endl;
+        while (std::getline(fin, line)) {
+            
+            std::stringstream ss(line);
+            std::string item;
+            char delim { ',' };
+
+            std::cout << line << std::endl;
+            Game newGame {};
+
+            std::getline(ss, item, delim);
+            //std::cout << item;
+            newGame.appId = tryStoi(item);
+
+            std::getline(ss, item, delim);
+            //std::cout << item;
+            newGame.title = item;
+
+            std::getline(ss, item, delim);
+            //std::cout << item;
+            newGame.relDate = item;
+
+            std::getline(ss, item, delim);
+            //std::cout << item;
+            newGame.windows = (item == "TRUE") ? true : false;
+
+            std::getline(ss, item, delim);
+            //std::cout << item;
+            newGame.macOS = (item == "TRUE") ? true : false;
+
+            std::getline(ss, item, delim);
+            newGame.linux = (item == "TRUE") ? true : false;
+
+            std::getline(ss, item, delim);
+            newGame.rating = getRating(item);
+
+            std::getline(ss, item, delim);
+            newGame.posRatio = tryStoi(item);
+
+            std::getline(ss, item, delim);
+            newGame.userReviews = tryStoi(item);
+
+            std::getline(ss, item, delim);
+            newGame.priceFinal;
+
+            std::getline(ss, item, delim);
+            newGame.priceOriginal;
+
+            std::getline(ss, item, delim);
+            newGame.steamDeck = (item == "TRUE") ? true : false;
+
+            std::cout << newGame;
+
+
+            if (steamGames.ContainsKey(newGame.title.at(0))) {
+
+                steamGames.Get(newGame.title.at(0)).add(newGame);
+            }
+
+            else {
+
+                BinaryTree<Game> gameList {};
+                gameList.add(newGame);
+                steamGames.Put(newGame.title.at(0), gameList);
+            }
+
+            ss.flush();
+        }
+    }
+
+    else {
+
+        std::cout << "File read failed." << std::endl;
+    }
+
+    steamGames.PrintInOrder();
 };
+
+
 
 #pragma endregion
 
@@ -156,6 +265,11 @@ void Q4() {
 #pragma endregion
 
 
+/// <summary>
+/// Function to try conversion of a string into an int.
+/// </summary>
+/// <param name="input">String attempt conversion.</param>
+/// <returns> If successful returns integer, otherwise returns -1</returns>
 int tryStoi(const std::string &input) {
 
     int output;
@@ -172,4 +286,41 @@ int tryStoi(const std::string &input) {
     }
 
     return output;
+}
+
+/// <summary>
+/// Discerns the string value as it's appropriate enum state. 
+/// </summary>
+/// <param name="input">String to evaluate.</param>
+/// <returns>Rating Enum value.</returns>
+Rating getRating(std::string &input) {
+    
+    if (input == "Overwhelmingly Positive") 
+        return OverwhelminglyPositive;
+    
+    if (input == "Very Positive") 
+        return VeryPositive;
+
+    if (input == "Positive") 
+        return Positive;
+
+    if (input == "Mostly Positive") 
+        return MostlyPositive;
+
+    if (input == "Mixed") 
+        return Mixed;
+
+    if (input == "Mostly Negative") 
+        return MostlyNegative;
+
+    if (input == "Negative")
+        return Negative;
+
+    if (input == "Very Negative")
+        return VeryNegative;
+
+    if (input == "Overwhelmingly Negative") 
+        return OverwhelminglyNegative;
+
+    return Mixed;
 }

@@ -133,10 +133,13 @@
     <ClInclude Include="BinaryTree.h" />
     <ClInclude Include="BSTNode.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="TreeMap.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CA2 - Assessment Spec.docx" />
+    <None Include="games.csv" />
+    <None Include="gamesFull.csv" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="InfiniteAndDivineExtract.txt" />

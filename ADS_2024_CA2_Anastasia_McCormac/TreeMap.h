@@ -22,7 +22,7 @@ public:
 	void Clear(); // Removes all Entries from the Map.
 	bool ContainsKey(K key); // Returns true if thie map contains a mapping for athe specified key.
 	V &Get(K key); // Returns the value to which the specified key is mapped, or nullptr if thie map contains mo mapping for the key.
-	BinaryTree<K> KeySet(); // Returns a set view of the keys contained in this Map.
+	//BinaryTree<K> KeySet(); // Returns a set view of the keys contained in this Map.
 	void Put(K key, V& value); //Associates the specified value with the specified key in this map.
 	int Size();	// Returns the number of key - value mappings in this map.
 	bool RemoveKey(K key); // Removes the item denoted by the given key.
@@ -98,23 +98,24 @@ V &TreeMap<K, V>::Get(K key) {
 
 }
 
-//// Returns a set view of the keys contained in this Map.
-template<class K, class V>
-BinaryTree<K> TreeMap<K, V>::KeySet() {
-
-	BinaryTree<K> keySet {};
-	
-	Entity<K, V> *asArray[] = treeMap.toArray();
-
-	for (Entity<K, V> e : asArray) {
-
-		keySet.add(e.key);
-	}
-
-	delete[] asArray;
-
-	return keySet;
-}
+// TODO: Need to Fix this.
+// Returns a set view of the keys contained in this Map
+//template<class K, class V>
+//BinaryTree<K> TreeMap<K, V>::KeySet() {
+//
+//	BinaryTree<K> keySet {};
+//	
+//	K *asArray[] = treeMap.toArray();
+//
+//	for (V e : asArray) {
+//
+//		keySet.add(e.key);
+//	}
+//
+//	//delete[] asArray;
+//
+//	return keySet;
+//}
  
 
 //Associates the specified value with the specified key in this map.

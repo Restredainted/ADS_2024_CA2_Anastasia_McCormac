@@ -11,22 +11,22 @@ struct Entity {
 	V value;
 
 	template<class K, class V>
-	bool operator < (Entity<K, V> &right) {
+	bool operator < (Entity<K, V> &other) {
 
-		return key < right.key;
-	};
+		return key < other.key;
+	}
 
 	template<class K, class V>
-	bool operator > (Entity<K, V> &right) {
+	bool operator > (Entity<K, V> &other) {
 
-		return key > right.key;
-	};
+		return key > other.key;
+	}
 
 	template<class K, class V>
 	bool operator== (Entity<K, V> &other) {
 
 		return key == other.key;
-	};
+	}
 };
 
 template<class K, class V>
