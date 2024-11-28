@@ -17,6 +17,7 @@ void Q2();
 void Q3();
 void Q4();
 int tryStoi(const std::string &input);
+float tryStof(const std::string &input);
 Rating getRating(std::string &input);
 enum question { A = 1, B = 2, C = 3, D = 4 };
 
@@ -161,7 +162,7 @@ void Q3() {
 
     // Ref: Kozyriev, A. (2024). Game Recommendations on Steam (Online) Available at: 
     // https://www.kaggle.com/datasets/antonkozyriev/game-recommendations-on-steam [Last Accessed 28/11/2024]
-    std::fstream fin { "games.csv" };
+    std::fstream fin { "gamesFull.csv" };
 
     TreeMap<char, BinaryTree<Game>> steamGames {};
 
@@ -174,14 +175,14 @@ void Q3() {
 
         std::getline(fin, line); // Clear headers row.
 
-        std::cout << line << std::endl;
+        //std::cout << line << std::endl;
         while (std::getline(fin, line)) {
             
             std::stringstream ss(line);
             std::string item;
             char delim { ',' };
 
-            std::cout << line << std::endl;
+            //std::cout << line << std::endl;
             Game newGame {};
 
             std::getline(ss, item, delim);
@@ -198,14 +199,14 @@ void Q3() {
 
             std::getline(ss, item, delim);
             //std::cout << item;
-            newGame.windows = (item == "TRUE") ? true : false;
+            newGame.windows = (item == "true") ? true : false;
 
             std::getline(ss, item, delim);
             //std::cout << item;
-            newGame.macOS = (item == "TRUE") ? true : false;
+            newGame.macOS = (item == "true") ? true : false;
 
             std::getline(ss, item, delim);
-            newGame.linux = (item == "TRUE") ? true : false;
+            newGame.linux = (item == "true") ? true : false;
 
             std::getline(ss, item, delim);
             newGame.rating = getRating(item);
@@ -217,15 +218,15 @@ void Q3() {
             newGame.userReviews = tryStoi(item);
 
             std::getline(ss, item, delim);
-            newGame.priceFinal;
+            newGame.priceFinal = tryStof(item);
 
             std::getline(ss, item, delim);
-            newGame.priceOriginal;
+            newGame.priceOriginal = tryStof(item);
 
             std::getline(ss, item, delim);
-            newGame.steamDeck = (item == "TRUE") ? true : false;
+            newGame.steamDeck = (item == "true") ? true : false;
 
-            std::cout << newGame;
+            //std::cout << newGame << std::endl;
 
 
             if (steamGames.ContainsKey(newGame.title.at(0))) {
@@ -249,7 +250,13 @@ void Q3() {
         std::cout << "File read failed." << std::endl;
     }
 
-    steamGames.PrintInOrder();
+    printf("| %-8s | %-25s | %-12s | %-8s | %-8s | %-8s | %-10s | %-24s | %-12s | %-15s | %-10s | %-10s |",
+        "App ID", "Title", "Release Date", "Windows", "Mac OS", "Linux", "Steam Deck", "Rating", "Ratio", "Reviews", "Price Cur", "Price Ori"
+    );
+
+    std::cout << std::endl;
+    steamGames ['a'].printInOrder();
+    //steamGames.PrintInOrder();
 };
 
 
@@ -277,6 +284,29 @@ int tryStoi(const std::string &input) {
     try {
 
         output = stoi(input);
+    }
+
+    catch (...) {
+
+        std::cout << "Conversion failure of Value: " << input << std::endl;
+        output = -1;
+    }
+
+    return output;
+}
+
+/// <summary>
+/// Function to try conversion of a string into an int.
+/// </summary>
+/// <param name="input">String attempt conversion.</param>
+/// <returns> If successful returns integer, otherwise returns -1</returns>
+float tryStof(const std::string &input) {
+
+    float output;
+
+    try {
+
+        output = stof(input);
     }
 
     catch (...) {

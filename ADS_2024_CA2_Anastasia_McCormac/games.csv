@@ -1,2 +1,2 @@
-app_id,title,date_release,win,mac,linux,rating,positive_ratio,user_reviews,price_final,price_original,discount,steam_deck
-13500,Prince of Persia: Warrior Within™,2008-11-21,true,false,false,Very Positive,84,2199,9.99,9.99,0.0,true
+app_id,title,date_release,win,mac,linux,rating,positive_ratio,user_reviews,price_final,price_original,steam_deck
+13500,Prince of Persia: Warrior Within™,21/11/2008,TRUE,FALSE,FALSE,Very Positive,84,2199,9.99,9.99,TRUE

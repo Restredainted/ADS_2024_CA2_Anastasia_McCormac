@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 
-
 enum Rating {
 
 	OverwhelminglyPositive = 8,
@@ -31,7 +30,7 @@ struct Game {
 	float priceFinal;
 	float priceOriginal;
 
-	
+	// Operator Overload Functions. 
 	bool operator < (Game &other) {
 
 		return title < other.title;
@@ -48,22 +47,73 @@ struct Game {
 	}
 };
 
+std::string RatingToStr(Game &game);
+
+
 // Output stream opereator overload for Game struct. 
 std::ostream &operator<<(std::ostream &out, Game &game) {
 
-	out << " | " << printf("%d", game.appId);
-	out << " | " << printf("%s", game.title);
-	out << " | " << printf("%s", game.relDate);
-	out << " | " << printf("%s", ((game.windows) ? "Yes" : "No"));
-	out << " | " << printf("%s", ((game.macOS) ? "Yes" : "No" ))
-		<< " | " << printf("%s", ((game.linux) ? "Yes" : "No" ))
-		<< " | " << printf("%15d", game.rating)
-		<< " | " << printf("%5d", game.posRatio)
-		<< " | " << printf("%8d", game.userReviews)
-		<< " | " << printf("%6f", game.priceFinal)
-		<< " | " << printf("%9f", game.priceOriginal)
-		<< " | " << printf("%8s", ((game.steamDeck) ? "Yes" : "No" ))
-		<< " | " << std::endl;
-
+	 printf("| %-8d | %-25s | %-12s | %-8s | %-8s | %-8s | %-10s | %-24s | %-12d | %-15d | %10.2f | %10.2f |",
+		game.appId,
+		(game.title.length() <= 25) ? game.title.c_str() : game.title.substr(0, 25).c_str(),
+		game.relDate.c_str(),
+		((game.windows) ? "Yes" : "No"),
+		((game.macOS) ? "Yes" : "No"),
+		((game.linux) ? "Yes" : "No"),
+		((game.steamDeck) ? "Yes" : "No"),
+		RatingToStr(game).c_str(),
+		game.posRatio,
+		game.userReviews,
+		game.priceFinal,
+		game.priceOriginal 
+	 );
+	
+	 
 	return out;
 };
+
+std::string RatingToStr(Game &game) {
+
+	std::string value {};
+
+	switch (game.rating) {
+
+		case 8:
+			value = "Overwhelmingly Positive";
+			break;
+
+		case 7:
+			value = "Very Positive";
+			break;
+
+		case 6:
+			value = "Positive";
+			break;
+
+		case 5:
+			value = "Mostly Positive";
+			break;
+
+		case 4:
+			value = "Mixed";
+			break;
+
+		case 3:
+			value = "Mostly Negative";
+			break;
+
+		case 2:
+			value = "Negative";
+			break;
+
+		case 1:
+			value = "Very Negative";
+			break;
+
+		case 0:
+			value = "Overwhelmingly Negative";
+			break;
+	}
+
+	return value;
+}
