@@ -39,11 +39,6 @@ int main()
         Q2();
         break;
 
-    // disabling as now accessed through Q4, the method has been updated to return the address of a relevant TreeMap. 
-    //case C:
-    //    Q3();
-    //    break;
-
     case D:
         Q4();
         break;
@@ -165,7 +160,6 @@ void Q3(TreeMap<char, BinaryTree<Game>> &tree) {
     // https://www.kaggle.com/datasets/antonkozyriev/game-recommendations-on-steam [Last Accessed 28/11/2024]
     std::fstream fin { "games.csv" };
 
-    //steamGames.PrintInOrder();
     if (fin) {
 
         std::cout << "File Opened Successfully, Reading Data.\n";
@@ -174,34 +168,27 @@ void Q3(TreeMap<char, BinaryTree<Game>> &tree) {
 
         std::getline(fin, line); // Clear headers row.
 
-        //std::cout << line << std::endl;
         while (std::getline(fin, line)) {
 
             std::stringstream ss(line);
             std::string item;
             char delim { ',' };
 
-            //std::cout << line << std::endl;
             Game newGame {};
 
             std::getline(ss, item, delim);
-            //std::cout << item;
             newGame.appId = tryStoi(item);
 
             std::getline(ss, item, delim);
-            //std::cout << item;
             newGame.title = item;
 
             std::getline(ss, item, delim);
-            //std::cout << item;
             newGame.relDate = item;
 
             std::getline(ss, item, delim);
-            //std::cout << item;
             newGame.windows = (item == "true" || "TRUE") ? true : false;
 
             std::getline(ss, item, delim);
-            //std::cout << item;
             newGame.macOS = (item == "true" || "TRUE") ? true : false;
 
             std::getline(ss, item, delim);
@@ -222,11 +209,8 @@ void Q3(TreeMap<char, BinaryTree<Game>> &tree) {
             std::getline(ss, item, delim);
             newGame.steamDeck = (item == "true" || "TRUE") ? true : false;
 
-            //std::cout << newGame << std::endl;
-
-
             if (tree.ContainsKey(newGame.title.at(0))) {
-                //std::cout << newGame.title.at(0) << " - " << newGame.title << std::endl;
+                
                 tree.Get(newGame.title.at(0)).add(newGame);
             }
 
@@ -245,19 +229,12 @@ void Q3(TreeMap<char, BinaryTree<Game>> &tree) {
     }
 
     else {
-        // Will end up returning empty tree if file fails to load. 
+        // Will leave empty tree if file fails to load. 
         std::cout << "File read failed, no data loaded." << std::endl;
 
     }
 
-    //printHeaders();
     std::cout.flush();
-
-    //std::cout << std::endl;
-    //steamGames.PrintInOrder();
-
-    //std::cout << steamGames ['P']; // Will logic error if value isn't found. 
-    //tree.PrintInOrder();
 };
 
 #pragma endregion
@@ -266,7 +243,7 @@ void Q3(TreeMap<char, BinaryTree<Game>> &tree) {
 
 void Q4() {
 
-    TreeMap<char, BinaryTree<Game>> steamGames = TreeMap<char, BinaryTree<Game>>();
+    TreeMap<char, BinaryTree<Game>> steamGames {};
     Q3(steamGames);
 
     printHeaders();
