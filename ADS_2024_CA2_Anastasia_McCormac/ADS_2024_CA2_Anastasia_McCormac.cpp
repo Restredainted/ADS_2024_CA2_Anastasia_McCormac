@@ -55,18 +55,18 @@ int main()
 /// </summary>
 void Q1() {
 
-    BinaryTree<Entity<int, std::string>> testTree {};
+    TreeMap<int, std::string> testTree {};
 
-    //Entity<int, std::string> newEnt {2, "World"};
-    //testTree.add(newEnt);
+    std::string word1 = "World";
+    testTree.Put(2, word1);
 
-    //newEnt = Entity<int, std::string>(1, "Hello");
-    //testTree.add(newEnt);
+    std::string word2 = "Hello";
+    testTree.Put(1, word2);
 
-    //newEnt = Entity<int, std::string>(3, "!");
-    //testTree.add(newEnt);
+    std::string word3 = "!";
+    testTree.Put(3, word3);
 
-    testTree.printInOrder();
+    testTree.PrintInOrder();
 };
 
 #pragma endregion
@@ -229,9 +229,9 @@ void Q3(TreeMap<char, BinaryTree<Game>> &tree) {
     }
 
     else {
+
         // Will leave empty tree if file fails to load. 
         std::cout << "File read failed, no data loaded." << std::endl;
-
     }
 
     std::cout.flush();
@@ -245,12 +245,14 @@ void Q4() {
 
     TreeMap<char, BinaryTree<Game>> steamGames {};
     TreeMap<char, BinaryTree<Game>> WorkingTree {};
-    Q3(steamGames);
     int command = -1;
     std::string input {""};
 
+    Q3(steamGames); // Generate tree from Stage 3 code. 
+
     // Primary program loop.
     std::cout << "\nWelcome, what would you like to do? (input number)\n";
+
     do {
 
         std::cout <<
@@ -266,11 +268,7 @@ void Q4() {
             std::cout << command;
             bool findingIndex {};
 
-            if (command == 1)
-                findingIndex = true;
-            
-            else
-                findingIndex = false;
+            findingIndex = (command == 1) ? true : false;
             
             std::cout << "\nWhat field would you like to " << ((findingIndex) ? "index" : "filter") << "?\n" <<
                 "1. App ID\n2. Title\n3. Release Date\n4. Windows\n" <<
@@ -280,40 +278,72 @@ void Q4() {
             std::cin >> input;
             command = tryStoi(input);
 
+            // This section is incomplete, my KeySet() doesn't work and instead of spending
+            // a bunch of time figuring this part out I wrote unit tests. 
             if (command > 0 || command < 12) {
 
                 switch (command) {
 
-                    // "App ID", 
-                case 1:
+                    /* General process for each field. 
+                    * 
+                    if findingIndex,
+
+                        Create new tree using the desired field as the key, with the game objects as their values. 
+                        ie, TreeMap<<field>, <List>> IndexedTree;
+                        
+                        Iterate through tree checking the desired field, 
+
+                            if  
+                                the field exists add it to the list, 
+
+                            else 
+                                add it to a new key. 
+
+                        Output the new indexed tree.
+
+                    else 
+                        
+                        Ask for user input for what they want to search for in their chosen field. ie, titles to contain X word.
+                            
+                            Create New List of Game Objects, 
+
+                            Iterate through the base tree,
+                                
+                                check if current game object meets filter requirement.
+                                    
+                                    add to list if it does, ignore otherwise.
+
+                            output the temporary list.
+
+                        */
+                        
+                case 1: // "App ID"
 
                     //steamGames.KeySet().printInOrder();
                     break;
 
-                    // "Title", 
-
-                case 3:
-
-                    break;
-
-                    // "Windows", 
-
-                case 7:
+                     
+                case 3: // "Title"
 
                     break;
 
-                    // "Rating", 
-                case 8:
+                     
+                case 7: // "Windows"
 
                     break;
 
-                    // "Reviews", 
-                case 10:
+                     
+                case 8: // "Rating"
 
                     break;
 
-                    // "Price"
-                case 11:
+                      
+                case 10: // "Reviews"
+
+                    break;
+
+                    
+                case 11: // "Price"
 
                     break;
                 }

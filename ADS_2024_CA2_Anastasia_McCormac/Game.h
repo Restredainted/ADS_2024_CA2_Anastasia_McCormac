@@ -3,6 +3,7 @@
 #pragma once
 #include <string>
 
+
 enum Rating {
 
 	OverwhelminglyPositive = 8,
@@ -51,7 +52,7 @@ struct Game {
 std::string RatingToStr(Game &game);
 std::ostream &operator<<(std::ostream &out, Rating &rating);
 
-// Output stream opereator overload for Game struct. 
+// Output stream operator overload for Game struct. 
 std::ostream &operator<<(std::ostream &out, Game &game) {
 
 	 printf("| %-8d | %-25s | %-12s | %-8s | %-8s | %-8s | %-10s | %-24s | %-6f | %-7d | %6.2f |",
