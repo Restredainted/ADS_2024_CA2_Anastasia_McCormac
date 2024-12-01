@@ -10,7 +10,6 @@ class TreeMap {
 
 	BinaryTree<Entity<K, V>> treeMap;
 
-
 public:
 
 	// Constructors
@@ -28,7 +27,6 @@ public:
 	bool RemoveKey(K key); // Removes the item denoted by the given key.
 	V &operator[] (K key); // Returns the value to which the specified key is mapped, or nullptr if this map contains no mapping for the key.
 	void PrintInOrder();
-
 };
 
 template <class K, class V>
@@ -42,14 +40,12 @@ TreeMap<K, V>::TreeMap(K key,V value) {
 
 	treeMap = BinaryTree<Entity<K, V>>();
 	treeMap.add(new Entity<K, V>(key, value));
-
 }
 
 template<class K, class V>
 TreeMap<K, V>::~TreeMap() {
 
 	treeMap.clear();
-	
 }
 
 // Removes all Entries from the Map.
@@ -87,13 +83,14 @@ V &TreeMap<K, V>::Get(K key) {
 	Entity<K, V> byKey {key, V {}};
 	
 	try { 
+
 		return  treeMap.get(byKey).value;
 	}
 
 	catch (...) {
+
 		throw std::logic_error("Item not found");
 	}
-
 }
 
 // TODO: Need to Fix this.

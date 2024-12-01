@@ -244,10 +244,115 @@ void Q3(TreeMap<char, BinaryTree<Game>> &tree) {
 void Q4() {
 
     TreeMap<char, BinaryTree<Game>> steamGames {};
+    TreeMap<char, BinaryTree<Game>> WorkingTree {};
     Q3(steamGames);
+    int command = -1;
+    std::string input {""};
 
-    printHeaders();
-    steamGames.PrintInOrder();
+    // Primary program loop.
+    std::cout << "\nWelcome, what would you like to do? (input number)\n";
+    do {
+
+        std::cout <<
+            "1. Create an index of items by field.\n" <<
+            "2. View a subset of data.\n" << 
+            "0. Exit" << std::endl;
+
+        std::cin >> input;
+        command = tryStoi(input);
+
+        if (command == (1 || 2)) {
+            std::cout << command;
+            bool findingIndex {};
+
+            if (command == 1)
+                findingIndex = true;
+            
+            else
+                findingIndex = false;
+            
+            std::cout << "\nWhat field would you like to " << ((findingIndex) ? "index" : "filter") << "?\n" <<
+                "1. App ID\n2. Title\n3. Release Date\n4. Windows\n" <<
+                "5. Mac OS\n6. Linux\n7. Steam Deck\n8. Rating\n" <<
+                "9. Ratio\n10. Reviews\n11. Price\n";
+
+            std::cin >> input;
+            command = tryStoi(input);
+
+            if (command > 0 || command < 12) {
+
+                switch (command) {
+
+                    // "App ID", 
+                case 1:
+
+                    break;
+
+                    // "Title", 
+                case 2:
+
+                    break;
+                    // "Release Date", 
+                case 3:
+
+                    break;
+
+                    // "Windows", 
+                case 4:
+
+                    break;
+
+                    // "Mac OS", 
+                case 5:
+
+                    break;
+
+                    // "Linux", 
+                case 6:
+
+                    break;
+
+                    // "Steam Deck", 
+                case 7:
+
+                    break;
+
+                    // "Rating", 
+                case 8:
+
+                    break;
+
+                    // "Ratio", 
+                case 9:
+
+                    break;
+
+                    // "Reviews", 
+                case 10:
+
+                    break;
+
+                    // "Price"
+                case 11:
+
+                    break;
+                }
+            }
+
+            else {
+                std::cout << "\nInvalid Input" << std::endl;
+            }
+        }
+
+        else if (command < 0 || command > 2) {
+
+            std::cout << "invalid input";
+        }
+    }
+
+    while (command != 0);
+
+    std::cout << "Goodbye!";
 };
 
 #pragma endregion
