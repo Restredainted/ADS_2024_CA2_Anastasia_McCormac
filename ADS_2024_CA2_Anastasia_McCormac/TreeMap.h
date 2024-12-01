@@ -1,5 +1,5 @@
 // Author: Anastasia McCormac - GD3a
-// Created on: 
+// Created on: 18/11/2024
 
 #pragma once
 #include "BinaryTree.h"
@@ -15,13 +15,12 @@ public:
 	// Constructors
 	TreeMap<K, V>();
 	TreeMap<K, V>(K key, V Value);
-	// BinaryTree<Entity<K, V>>();
 	~TreeMap();
 
 	void Clear(); // Removes all Entries from the Map.
 	bool ContainsKey(K key); // Returns true if thie map contains a mapping for athe specified key.
 	V &Get(K key); // Returns the value to which the specified key is mapped, or nullptr if thie map contains mo mapping for the key.
-	//BinaryTree<K> KeySet(); // Returns a set view of the keys contained in this Map.
+	BinaryTree<K> KeySet(); // Returns a set view of the keys contained in this Map.
 	void Put(K key, V& value); //Associates the specified value with the specified key in this map.
 	int Size();	// Returns the number of key - value mappings in this map.
 	bool RemoveKey(K key); // Removes the item denoted by the given key.
@@ -54,7 +53,6 @@ void TreeMap<K, V>::Clear() {
 
 	treeMap.clear();
 }
-
 
 // Returns true if thie map contains a mapping for the specified key.
 template<class K, class V>
@@ -95,23 +93,22 @@ V &TreeMap<K, V>::Get(K key) {
 
 // TODO: Need to Fix this.
 // Returns a set view of the keys contained in this Map
-//template<class K, class V>
-//BinaryTree<K> TreeMap<K, V>::KeySet() {
-//
-//	BinaryTree<K> keySet {};
-//	
-//	K *asArray[] = treeMap.toArray();
-//
-//	for (V e : asArray) {
-//
-//		keySet.add(e.key);
-//	}
-//
-//	//delete[] asArray;
-//
-//	return keySet;
-//}
- 
+template<class K, class V>
+BinaryTree<K> TreeMap<K, V>::KeySet() {
+
+	BinaryTree<K> keySet {};
+	
+	K *asArray[] = treeMap.toArray();
+
+	for (V e : asArray) {
+
+		keySet.add(e.key);
+	}
+
+	//delete[] asArray;
+
+	return keySet;
+}
 
 //Associates the specified value with the specified key in this map.
 template<class K, class V>
@@ -133,8 +130,6 @@ int TreeMap<K, V>::Size() {
 template<class K, class V>
 bool TreeMap<K, V>::RemoveKey(K key) {
 
-	
-
 	if (this->ContainsKey(key)) {
 
 		Entity<K, V> toRemove {key, V {}};
@@ -142,6 +137,7 @@ bool TreeMap<K, V>::RemoveKey(K key) {
 		treeMap.remove(toRemove);
 		return true;
 	}
+
 	return false;
 }
 

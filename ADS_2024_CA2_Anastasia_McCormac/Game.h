@@ -1,3 +1,5 @@
+// Author: Anastasia McCormac - GD3a
+// Created on: 28/11/2024
 #pragma once
 #include <string>
 

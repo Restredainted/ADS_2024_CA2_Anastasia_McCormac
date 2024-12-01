@@ -1,5 +1,5 @@
 // Author: Anastasia McCormac - GD3a
-// Created on: 
+// Created on: 14/11/2024
 // ADS_2024_CA2_Anastasia_McCormac.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
 
@@ -340,13 +340,13 @@ void Q4() {
             }
 
             else {
-                std::cout << "\nInvalid Input" << std::endl;
+                std::cout << "\nInvalid Input." << std::endl;
             }
         }
 
         else if (command < 0 || command > 2) {
 
-            std::cout << "invalid input";
+            std::cout << "\nInvalid input." << std::endl;
         }
     }
 
