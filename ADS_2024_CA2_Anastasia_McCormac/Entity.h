@@ -7,8 +7,8 @@
 template <class K, class V> 
 struct Entity {
 
-	K key;
-	V value;
+	K key {};
+	V value {};
 
 	template<class K, class V>
 	bool operator < (Entity<K, V> &other) {

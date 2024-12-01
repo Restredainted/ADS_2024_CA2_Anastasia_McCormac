@@ -17,17 +17,17 @@ enum Rating {
 // Struct for game objects.
 struct Game {
 
-	int appId;
-	std::string title;
-	std::string relDate;
-	bool windows;
-	bool macOS;
-	bool linux;
-	bool steamDeck;
-	Rating rating;
-	int posRatio;
-	int userReviews;
-	float price;
+	int appId = 0;
+	std::string title = "Default";
+	std::string relDate = "DD/MM/YYYY"; // Simply using a string to avoid using Date/Times. May Update if I have time. 
+	bool windows = true;
+	bool macOS = true;
+	bool linux = true;
+	bool steamDeck = true;
+	Rating rating = Mixed;
+	float posRatio = 0.0;
+	int userReviews = 0;
+	float price = 0.0;
 
 	// Operator Overload Functions. 
 	bool operator < (Game &other) {
@@ -47,12 +47,12 @@ struct Game {
 };
 
 std::string RatingToStr(Game &game);
-
+std::ostream &operator<<(std::ostream &out, Rating &rating);
 
 // Output stream opereator overload for Game struct. 
 std::ostream &operator<<(std::ostream &out, Game &game) {
 
-	 printf("| %-8d | %-25s | %-12s | %-8s | %-8s | %-8s | %-10s | %-24s | %-6d | %-7d | %6.2f |",
+	 printf("| %-8d | %-25s | %-12s | %-8s | %-8s | %-8s | %-10s | %-24s | %-6f | %-7d | %6.2f |",
 		game.appId,
 		(game.title.length() <= 25) ? game.title.c_str() : game.title.substr(0, 25).c_str(),
 		game.relDate.c_str(),
@@ -65,9 +65,8 @@ std::ostream &operator<<(std::ostream &out, Game &game) {
 		game.userReviews,
 		game.price
 	 );
-	
 	 
-	return out;
+	 return out;
 };
 
 /// <summary>
@@ -156,4 +155,53 @@ std::string RatingToStr(Game &game) {
 	}
 
 	return value;
+}
+
+/// <summary>
+/// Rating stream output overload
+/// </summary>
+/// <param name="game">Rating to send upstream.</param>
+/// <returns>ostream operator.</returns>
+std::ostream &operator<<(std::ostream &out, Rating &rating) {
+
+	switch (rating) {
+
+	case 8:
+		out << "Overwhelmingly Positive";
+		break;
+
+	case 7:
+		out << "Very Positive";
+		break;
+
+	case 6:
+		out << "Positive";
+		break;
+
+	case 5:
+		out << "Mostly Positive";
+		break;
+
+	case 4:
+		out << "Mixed";
+		break;
+
+	case 3:
+		out << "Mostly Negative";
+		break;
+
+	case 2:
+		out << "Negative";
+		break;
+
+	case 1:
+		out << "Very Negative";
+		break;
+
+	case 0:
+		out << "Overwhelmingly Negative";
+		break;
+	}
+
+	return out;
 }

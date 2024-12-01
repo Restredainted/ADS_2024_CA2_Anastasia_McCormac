@@ -156,6 +156,7 @@ V &TreeMap<K, V>::operator[](K key) {
 	return Get(key);
 }
 
+// Wanted to implement ostream overload, but encountered a few issues so left it be. 
 //template<class K, class V>
 //std::ostream &operator<<(std::ostream &out, TreeMap<K, V> &other) {
 //	

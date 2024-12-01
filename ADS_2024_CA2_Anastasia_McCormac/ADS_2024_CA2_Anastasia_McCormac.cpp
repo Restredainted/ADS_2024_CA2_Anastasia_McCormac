@@ -18,7 +18,8 @@ void Q3();
 void Q4();
 int tryStoi(const std::string &input);
 float tryStof(const std::string &input);
-Rating getRating(std::string &input);
+Rating GetRating(std::string &input);
+void printHeaders();
 enum question { A = 1, B = 2, C = 3, D = 4 };
 
 int main()
@@ -212,7 +213,7 @@ void Q3() {
             newGame.rating = GetRating(item);
 
             std::getline(ss, item, delim);
-            newGame.posRatio = tryStoi(item);
+            newGame.posRatio = tryStof(item) / 100;
 
             std::getline(ss, item, delim);
             newGame.userReviews = tryStoi(item);
@@ -227,7 +228,7 @@ void Q3() {
 
 
             if (steamGames.ContainsKey(newGame.title.at(0))) {
-                std::cout << newGame.title.at(0) << " - " << newGame.title << std::endl;
+                //std::cout << newGame.title.at(0) << " - " << newGame.title << std::endl;
                 steamGames.Get(newGame.title.at(0)).add(newGame);
             }
 
@@ -237,11 +238,12 @@ void Q3() {
                 gameList.add(newGame);
                 steamGames.Put(newGame.title.at(0), gameList);
             }
-
+            
             ss.flush();
         }
-
+        
         fin.close();
+        
     }
 
     else {
@@ -249,17 +251,17 @@ void Q3() {
         std::cout << "File read failed." << std::endl;
     }
 
-    /*printf("| %-8s | %-25s | %-12s | %-8s | %-8s | %-8s | %-10s | %-24s | %-6s | %-7s | %-6s |",
-        "App ID", "Title", "Release Date", "Windows", "Mac OS", "Linux", "Steam Deck", "Rating", "Ratio", "Reviews", "Price"
-    );*/
+    printHeaders();
     std::cout.flush();
 
     std::cout << std::endl;
     //steamGames.PrintInOrder();
 
-    steamGames ['a'].printInOrder();
+    std::cout << steamGames ['P']; // Will logic error if value isn't found. 
     //steamGames.PrintInOrder();
-};
+}
+
+;
 
 #pragma endregion
 
@@ -270,6 +272,8 @@ void Q4() {
 };
 
 #pragma endregion
+
+#pragma region Utility
 
 
 /// <summary>
@@ -318,4 +322,14 @@ float tryStof(const std::string &input) {
     return output;
 }
 
+/// <summary>
+/// Simple hard code to print headers for tree Table. 
+/// </summary>
+void printHeaders() {
+    printf("\n| %-8s | %-25s | %-12s | %-8s | %-8s | %-8s | %-10s | %-24s | %-6.3s | %-7s | %-6s |",
+        "App ID", "Title", "Release Date", "Windows", "Mac OS", "Linux", "Steam Deck", "Rating", "Ratio", "Reviews", "Price"
+    );
+}
+
+#pragma endregion
 
