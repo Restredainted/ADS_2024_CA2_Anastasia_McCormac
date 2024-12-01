@@ -14,7 +14,7 @@
 
 void Q1();
 void Q2();
-void Q3();
+void Q3(TreeMap<char, BinaryTree<Game>> &tree); // Now takes i tree to assign info to. 
 void Q4();
 int tryStoi(const std::string &input);
 float tryStof(const std::string &input);
@@ -27,7 +27,7 @@ int main()
     std::cout << " ADS_2024_CA2_Anastasia_McCormac\n";
 
     // Change this value to change which question is accessed. 
-    question showQ { C };
+    question showQ { D };
 
     switch (showQ) {
     
@@ -39,9 +39,10 @@ int main()
         Q2();
         break;
 
-    case C:
-        Q3();
-        break;
+    // disabling as now accessed through Q4, the method has been updated to return the address of a relevant TreeMap. 
+    //case C:
+    //    Q3();
+    //    break;
 
     case D:
         Q4();
@@ -158,19 +159,16 @@ void Q2() {
 
 #pragma region Stage 3
 
-void Q3() {
-
+void Q3(TreeMap<char, BinaryTree<Game>> &tree) {
 
     // Ref: Kozyriev, A. (2024). Game Recommendations on Steam (Online) Available at: 
     // https://www.kaggle.com/datasets/antonkozyriev/game-recommendations-on-steam [Last Accessed 28/11/2024]
     std::fstream fin { "games.csv" };
 
-    TreeMap<char, BinaryTree<Game>> steamGames {};
-
-    steamGames.PrintInOrder();
+    //steamGames.PrintInOrder();
     if (fin) {
 
-        std::cout << "File Opened Successfully\n";
+        std::cout << "File Opened Successfully, Reading Data.\n";
 
         std::string line;
 
@@ -178,7 +176,7 @@ void Q3() {
 
         //std::cout << line << std::endl;
         while (std::getline(fin, line)) {
-            
+
             std::stringstream ss(line);
             std::string item;
             char delim { ',' };
@@ -227,41 +225,40 @@ void Q3() {
             //std::cout << newGame << std::endl;
 
 
-            if (steamGames.ContainsKey(newGame.title.at(0))) {
+            if (tree.ContainsKey(newGame.title.at(0))) {
                 //std::cout << newGame.title.at(0) << " - " << newGame.title << std::endl;
-                steamGames.Get(newGame.title.at(0)).add(newGame);
+                tree.Get(newGame.title.at(0)).add(newGame);
             }
 
             else {
 
                 BinaryTree<Game> gameList {};
                 gameList.add(newGame);
-                steamGames.Put(newGame.title.at(0), gameList);
+                tree.Put(newGame.title.at(0), gameList);
             }
-            
+
             ss.flush();
         }
-        
+
         fin.close();
-        
+        std::cout << "File Reading Complete." << std::endl;
     }
 
     else {
+        // Will end up returning empty tree if file fails to load. 
+        std::cout << "File read failed, no data loaded." << std::endl;
 
-        std::cout << "File read failed." << std::endl;
     }
 
-    printHeaders();
+    //printHeaders();
     std::cout.flush();
 
-    std::cout << std::endl;
+    //std::cout << std::endl;
     //steamGames.PrintInOrder();
 
-    std::cout << steamGames ['P']; // Will logic error if value isn't found. 
-    //steamGames.PrintInOrder();
-}
-
-;
+    //std::cout << steamGames ['P']; // Will logic error if value isn't found. 
+    //tree.PrintInOrder();
+};
 
 #pragma endregion
 
@@ -269,6 +266,11 @@ void Q3() {
 
 void Q4() {
 
+    TreeMap<char, BinaryTree<Game>> steamGames = TreeMap<char, BinaryTree<Game>>();
+    Q3(steamGames);
+
+    printHeaders();
+    steamGames.PrintInOrder();
 };
 
 #pragma endregion
