@@ -261,7 +261,8 @@ void Q4() {
         std::cin >> input;
         command = tryStoi(input);
 
-        if (command == (1 || 2)) {
+        if (command == 1 || command == 2) {
+
             std::cout << command;
             bool findingIndex {};
 
@@ -286,44 +287,23 @@ void Q4() {
                     // "App ID", 
                 case 1:
 
+                    //steamGames.KeySet().printInOrder();
                     break;
 
                     // "Title", 
-                case 2:
 
-                    break;
-                    // "Release Date", 
                 case 3:
 
                     break;
 
                     // "Windows", 
-                case 4:
 
-                    break;
-
-                    // "Mac OS", 
-                case 5:
-
-                    break;
-
-                    // "Linux", 
-                case 6:
-
-                    break;
-
-                    // "Steam Deck", 
                 case 7:
 
                     break;
 
                     // "Rating", 
                 case 8:
-
-                    break;
-
-                    // "Ratio", 
-                case 9:
 
                     break;
 
